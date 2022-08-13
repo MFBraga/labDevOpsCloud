@@ -1,10 +1,13 @@
 from flask import Flask
+from flask_wtf.csrf import CSRFProtect
 
 app = Flask(__name__)
 
+csrf = CSRFProtect(app)
+
 @app.route("/")
 def pagina_inicial():
-    return "Desafio: Custom Message  >>>>  SUPERADO!!!"
+    return "Laboratório Pipeline DevOps - MAURICIO BRAGA"
 
 if __name__ == '__main__':
     app.run()
