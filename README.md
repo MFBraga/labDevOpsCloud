@@ -1,3 +1,6 @@
+![DevOpsLab Pipeline Badge](https://github.com/MFBraga/labDevOpsCloud/actions/workflows/pipeline.yml/badge.svg)
+![Sonar Quality Gate Badge](https://sonarcloud.io/api/project_badges/measure?project=MFBraga_labDevOpsCloud&metric=alert_status)
+
 # DevOps Hands On
 
 ```
