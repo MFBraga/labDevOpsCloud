@@ -8,7 +8,8 @@ on:
       - main
 
 jobs:
-  Build:
+  Tests:
+   name: Tests
     runs-on: ubuntu-latest
     steps:
       - name: Setup Python
@@ -34,6 +35,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  
 
+  Build:
+      needs: Tests
+      name: Build
+      runs-on: ubuntu-latest
+      steps: 
+
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: New Relic License
+        run: |
+          sed -i "s/licensekey/${{ secrets.NEW_RELIC_LICENSE_KEY }}/g" Dockerfile
+
       - name: Login to Heroku Container registry
         env: 
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
@@ -49,7 +63,7 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
         run: | 
           echo '${{ secrets.GOOGLE_CREDENTIALS }}' > key.json
-          cat key.json | docker login -u _json_key --password-stdin https://us-west1-docker.pkg.dev/
+          cat key.json | docker login -u _json_key --password-stdin https://us-central1-docker.pkg.dev/
 
       - name: Build Image & Push
         env: 
