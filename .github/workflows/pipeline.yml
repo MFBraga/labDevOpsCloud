@@ -1,6 +1,15 @@
+# Nome do Workflow
+name: DevOpsLab Pipeline
+
+# Evento que irá acionar a pipeline
+on: 
+  push:
+    branches:
+      - main
+
 jobs:
   Tests:
-   name: Tests
+    name: Tests
     runs-on: ubuntu-latest
     steps:
       - name: Setup Python
